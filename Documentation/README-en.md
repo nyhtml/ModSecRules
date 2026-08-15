@@ -13,6 +13,13 @@ ModSecurity Tools Rules List
 
 ```TEXT
 # ============================
+# 500001 — Trusted IP Bypass
+# ============================
+SecRule REMOTE_ADDR "@ipMatch 127.0.0.1,1.1.1.1,8.8.8.8" "id:500001,phase:1,allow,ctl:ruleEngine=Off,msg:'Trusted IP bypass applied',tag:'Sipylus',tag:'bottrap',tag:'trusted-ip'"
+```
+
+```TEXT
+# ============================
 # 500101 — File Probing
 # ============================
 SecRule REQUEST_URI "@rx \.(shtml|env|bak|old|inc|config)$|/(\.git|\.svn)(/|$)" "id:500101,phase:1,deny,status:403,msg:'Bot trap: File Probe',tag:'Sipylus',tag:'bottrap',tag:'file-probe'"
